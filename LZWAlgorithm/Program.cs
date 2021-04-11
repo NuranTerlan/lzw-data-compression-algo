@@ -8,7 +8,7 @@ namespace LZWAlgorithm
         {
             var lzwCompressor = new LzwCompressor("banana_bandana");
             var encodedStr = lzwCompressor.Encode();
-            Console.WriteLine(encodedStr);
+            Console.WriteLine($"Encoded data -> %{encodedStr}% ({encodedStr.Length} bytes)");
         }
     }
 }
