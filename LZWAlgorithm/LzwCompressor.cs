@@ -38,6 +38,8 @@ namespace LZWAlgorithm
                 count++;
                 s = "" + Data[i];
             }
+            // one more step to finalize encoded data
+            _encodedList.Add(_dict[s]);
 
             string result = "";
 
@@ -61,7 +63,14 @@ namespace LZWAlgorithm
 
         public string Decode()
         {
-            throw new System.NotImplementedException();
+            string result = "";
+            for (int i = 0; i < _encodedList.Count; i++)
+            {
+                result += _dict.FirstOrDefault(pair =>
+                    pair.Value == _encodedList[i]).Key;
+            }
+
+            return result;
         }
     }
 }
