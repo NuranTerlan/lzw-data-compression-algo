@@ -9,6 +9,9 @@ namespace LZWAlgorithm
             var lzwCompressor = new LzwCompressor("banana_bandana");
             var encodedStr = lzwCompressor.Encode();
             Console.WriteLine($"Encoded data -> %{encodedStr}% ({encodedStr.Length} bytes)");
+
+            var decodedStr = lzwCompressor.Decode();
+            Console.WriteLine($"Decoded data -> %{decodedStr}%");
         }
     }
 }
