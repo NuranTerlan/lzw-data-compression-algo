@@ -7,7 +7,8 @@ namespace LZWAlgorithm
         static void Main(string[] args)
         {
             var lzwCompressor = new LzwCompressor("banana_bandana");
-            lzwCompressor.Encode();
+            var encodedStr = lzwCompressor.Encode();
+            Console.WriteLine(encodedStr);
         }
     }
 }
