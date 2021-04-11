@@ -14,6 +14,7 @@ namespace LZWAlgorithm
         public LzwCompressor(string data)
         {
             Data = data;
+            Console.WriteLine($"Initial data is -> %{data}% ({data.Length} bytes)");
         }
 
         public string Encode()
