@@ -41,24 +41,18 @@ namespace LZWAlgorithm
             // one more step to finalize encoded data
             _encodedList.Add(_dict[s]);
 
+            ReadDictionary();
             string result = "";
 
+            Console.WriteLine("Result of encoding:");
             for (int i = 0; i < _encodedList.Count; i++)
             {
+                Console.WriteLine($"  {_encodedList[i]} -> {GetDictKeyByValue(_encodedList[i])}");
                 result += _encodedList[i];
             }
+            Console.WriteLine();
 
             return result;
-        }
-
-        private void MakeDictionary(Dictionary<string, int> dict, ref int count)
-        {
-            for (int i = 0; i < Data.Length; i++)
-            {
-                if (Data[i] == ' ' || dict.ContainsKey(Data[i].ToString())) continue;
-                dict[Data[i].ToString()] = count;
-                count++;
-            }
         }
 
         public string Decode()
@@ -66,11 +60,36 @@ namespace LZWAlgorithm
             string result = "";
             for (int i = 0; i < _encodedList.Count; i++)
             {
-                result += _dict.FirstOrDefault(pair =>
-                    pair.Value == _encodedList[i]).Key;
+                result += GetDictKeyByValue(_encodedList[i]);
             }
 
             return result;
+        }
+
+        private string GetDictKeyByValue(int value)
+        {
+            return _dict.FirstOrDefault(pair => pair.Value == value).Key;
+        }
+
+        private void ReadDictionary()
+        {
+            Console.WriteLine("\nDictionary is fully created. Pairs are:");
+            foreach (var i in _dict)
+            {
+                Console.WriteLine($"  --> Key: {i.Key} | Value: {i.Value}");
+            }
+
+            Console.WriteLine();
+        }
+
+        private void MakeDictionary(Dictionary<string, int> dict, ref int count)
+        {
+            for (int i = 0; i < Data.Length; i++)
+            {
+                if (dict.ContainsKey(Data[i].ToString())) continue;
+                dict[Data[i].ToString()] = count;
+                count++;
+            }
         }
     }
 }
